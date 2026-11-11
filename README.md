@@ -11,15 +11,16 @@ O Saidinhas é uma aplicação web que sugere restaurantes e locais de lazer aos
 | Integrante | Responsabilidade |
 |---|---|
 | Anthony Augusto Neindite Nunes da Silva | Criação e configuração do repositório de testes |
-| Gardenia | Plano do Projeto de Testes |
+| Beatriz Freitas Coura Silva | Plano do Projeto de Testes |
+| Gardenia Iris Anselmo Rodrigues da Fonseca | Plano do Projeto de Testes |
 | Geovanna Quezia Oliveira de Cassia | Testes unitários |
-| Pedro | Testes funcionais automatizados |
+| Pedro Oliveira Coelho | Testes funcionais automatizados |
 | Sara de Almeida Pasolini | Apresentação |
-| Vânia | Testes funcionais manuais |
+| Vânia Lourenço Gonçalves | Testes funcionais manuais |
 
 ## Professora responsável
 
-* Roselene
+* Roselene Henrique Pereira Costa
 
 ## Escopo do Projeto de Testes
 

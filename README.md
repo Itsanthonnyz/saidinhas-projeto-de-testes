@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/34702751/README.md)
 # Projeto de Testes – Saidinhas
 
 Trabalho técnico da disciplina **Teste e Manutenção de Software**, do curso de Sistemas de Informação da PUC Minas. O grupo elaborou e executou um Projeto de Testes sobre o **Saidinhas**, Trabalho Interdisciplinar concluído em 2024/2, contemplando testes unitários, testes funcionais automatizados com Selenium, testes funcionais manuais e a refatoração de dois métodos.

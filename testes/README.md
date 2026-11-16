@@ -13,7 +13,12 @@ testes/
 │   └── login-usuario.test.js
 ├── automatizados/            testes funcionais automatizados (Selenium WebDriver)
 │   ├── apoio/                funções auxiliares dos testes com navegador
-│   └── login-usuario.test.js
+│   ├── cta01-cadastra-cliente.test.js
+│   ├── cta02-login-cliente-valido.test.js
+│   ├── cta03-login-cliente-senha-incorreta.test.js
+│   ├── cta04-cadastra-restaurante.test.js
+│   ├── cta05-login-restaurante-valido.test.js
+│   └── cta06 a cta10 (*.test.js)            busca, reservas e cupons
 ├── apoio/                    servidor usado durante os testes automatizados
 ├── jest.config.js            definição da suíte de testes
 └── package.json              dependências e comandos
@@ -55,7 +60,7 @@ Ao final de cada execução, o Jest apresenta a relação dos casos de teste com
 
 ## Suíte de testes
 
-A suíte está definida no arquivo `jest.config.js`, que agrupa os testes em dois projetos, `unitarios` e `automatizados`. Dessa forma, um único comando (`npm test`) executa todos os casos, e cada categoria também pode ser executada separadamente.
+A suíte está definida no arquivo `jest.config.js`, que agrupa os testes em dois projetos, `unitarios` e `automatizados`. Dessa forma, um único comando (`npm test`) executa todos os casos, e cada categoria também pode ser executada separadamente. Os testes são executados em sequência e em ordem alfabética (CTA01 a CTA10), um arquivo por vez, para que apenas uma janela do navegador fique aberta durante a execução.
 
 Antes dos testes automatizados, a suíte inicia o sistema por conta própria, utilizando uma **cópia temporária** do arquivo `codigo/db.json`. Assim, os cadastros feitos durante os testes não modificam os dados originais do projeto, e cada execução parte sempre do mesmo estado. Por esse motivo, não é necessário, nem recomendado, deixar o servidor ligado em outro terminal enquanto os testes são executados.
 
@@ -76,10 +81,10 @@ O arquivo `unitarios/login-usuario.test.js` serve de modelo.
 
 1. Crie um arquivo terminado em `.test.js` na pasta `automatizados/`.
 2. Utilize `abrirNavegador` uma vez por arquivo e `abrirPagina` no início de cada teste.
-3. Interaja com a tela por meio dos comandos do Selenium (`findElement`, `sendKeys`, `click`).
+3. Interaja com a tela por meio dos comandos do Selenium (`findElement`, `sendKeys`, `click`) ou das funções de apoio `clicarNoLink`, `abrirModal`, `preencherCampos` e `aguardarPagina`.
 4. Utilize `lerAlerta` para obter a mensagem exibida pelo sistema, ou `lerAlertas` para obter todas as mensagens exibidas.
 
-O arquivo `automatizados/login-usuario.test.js` serve de modelo.
+O arquivo `automatizados/cta01-cadastra-cliente.test.js` serve de modelo.
 
 > **Observação sobre as mensagens do sistema.** O Saidinhas comunica o resultado das ações por meio de `alert()`. Durante os testes automatizados, essas mensagens são registradas em vez de abrirem a caixa de diálogo do navegador, o que torna a leitura estável. Por isso, as mensagens devem ser lidas sempre com `lerAlerta` ou `lerAlertas`.
 
@@ -87,9 +92,10 @@ O arquivo `automatizados/login-usuario.test.js` serve de modelo.
 
 | Integrante | Responsabilidade |
 |---|---|
-| Anthonny | Criação e configuração do repositório de testes |
-| Geovanna | Testes unitários |
-| Pedro | Testes funcionais automatizados |
+| Anthonny | Criação e configuração do repositório de testes; desenvolvimento de 2 testes unitários e 5 automatizados |
+| Beatriz | Documentação |
+| Gardenia | Testes unitários |
+| Pedro | 5 testes funcionais automatizados |
 | Vânia | Testes funcionais manuais |
-| Gardenia | Plano do Projeto de Testes |
+| Geovanna | Plano do Projeto de Testes |
 | Sara | Apresentação |

@@ -1,4 +1,4 @@
-const { Builder } = require('selenium-webdriver');
+const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
 const URL_BASE = 'http://localhost:3000';
@@ -42,6 +42,43 @@ async function abrirPagina(navegador, caminho) {
   await limparAlertas(navegador);
 }
 
+async function clicarNoLink(navegador, texto) {
+  await navegador.findElement(By.linkText(texto)).click();
+}
+
+async function abrirModal(navegador, textoDoLink, idDoModal) {
+  await clicarNoLink(navegador, textoDoLink);
+  await navegador.wait(
+    () => navegador.executeScript(
+      `const modal = document.getElementById(arguments[0]);
+       return modal.classList.contains('show') && getComputedStyle(modal).opacity === '1';`,
+      idDoModal
+    ),
+    TEMPO_LIMITE,
+    `A janela "${idDoModal}" não foi aberta.`
+  );
+}
+
+async function preencherCampos(navegador, campos) {
+  for (const [id, valor] of Object.entries(campos)) {
+    const campo = await navegador.findElement(By.id(id));
+    await navegador.wait(until.elementIsVisible(campo), TEMPO_LIMITE);
+    await navegador.wait(async () => {
+      await campo.clear();
+      await campo.sendKeys(valor);
+      return (await campo.getAttribute('value')) === valor;
+    }, TEMPO_LIMITE, `Não foi possível preencher o campo "${id}".`);
+  }
+}
+
+async function aguardarPagina(navegador, trechoDaUrl) {
+  await navegador.wait(
+    until.urlContains(trechoDaUrl),
+    TEMPO_LIMITE,
+    `O sistema não abriu a página esperada (${trechoDaUrl}).`
+  );
+}
+
 async function lerAlertas(navegador) {
   let mensagens = [];
   await navegador.wait(async () => {
@@ -65,6 +102,10 @@ async function limparAlertas(navegador) {
 module.exports = {
   abrirNavegador,
   abrirPagina,
+  clicarNoLink,
+  abrirModal,
+  preencherCampos,
+  aguardarPagina,
   lerAlerta,
   lerAlertas,
   limparAlertas,

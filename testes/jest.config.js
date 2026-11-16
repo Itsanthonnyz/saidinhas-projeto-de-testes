@@ -1,5 +1,6 @@
 module.exports = {
   verbose: true,
+  testSequencer: '<rootDir>/apoio/ordem-alfabetica.js',
   projects: [
     {
       displayName: 'unitarios',

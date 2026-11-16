@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "servidor": "node apoio/servidor-teste.js",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:unitarios": "jest --selectProjects unitarios",
-    "test:automatizados": "jest --selectProjects automatizados"
+    "test:automatizados": "jest --selectProjects automatizados --runInBand"
   },
   "devDependencies": {
     "jest": "^29.7.0",

@@ -16,31 +16,28 @@ function criarItem(item, categoryName) {
     itemDiv.classList.add('card');
 
     const img = document.createElement('img');
-    const imageName = item.image_url;
-    img.src = imageName.includes('http') ? imageName : `/codigo/public/assets/images/${imageName}.jpg`;
+    img.src = item.image_url.includes('http')
+        ? item.image_url
+        : `/codigo/public/assets/images/${item.image_url}.jpg`;
     img.alt = item.name;
     img.style.width = '200px';
-    img.style.borderRadius = '8px'; 
+    img.style.borderRadius = '8px';
 
     const title = document.createElement('h3');
     title.textContent = item.name;
 
-    const description = document.createElement('p');
-    description.textContent = item.description;
-
-    const priceInfo = document.createElement('p');
-    priceInfo.classList.add('info');
-    priceInfo.innerHTML = `Preço: R$ ${item.price}`;
-
-    const originInfo = document.createElement('p');
-    originInfo.classList.add('info');
-    originInfo.textContent = `Origem: ${item.origin || 'Desconhecida'}`;
+    const criarParagrafo = (texto, classe) => {
+        const paragrafo = document.createElement('p');
+        paragrafo.textContent = texto;
+        if (classe) paragrafo.classList.add(classe);
+        return paragrafo;
+    };
 
     itemDiv.appendChild(img);
     itemDiv.appendChild(title);
-    itemDiv.appendChild(description);
-    itemDiv.appendChild(priceInfo);
-    itemDiv.appendChild(originInfo);
+    itemDiv.appendChild(criarParagrafo(item.description));
+    itemDiv.appendChild(criarParagrafo(`Preço: R$ ${item.price}`, 'info'));
+    itemDiv.appendChild(criarParagrafo(`Origem: ${item.origin || 'Desconhecida'}`, 'info'));
 
     return itemDiv;
 }
@@ -83,13 +80,14 @@ function filterItems(selectedCategory, categories) {
     const itemsList = document.getElementById('items-list');
     itemsList.innerHTML = '';
 
-    categories.forEach(category => {
-        if (selectedCategory === 'all' || category.name === selectedCategory) {
-            category.items.forEach(item => {
-                const itemDiv = criarItem(item, category.name);
-                itemsList.appendChild(itemDiv);
-            });
-        }
+    const categoriesToRender = selectedCategory === 'all'
+        ? categories
+        : categories.filter(category => category.name === selectedCategory);
+
+    categoriesToRender.forEach(category => {
+        category.items.forEach(item => {
+            itemsList.appendChild(criarItem(item, category.name));
+        });
     });
 }
 
